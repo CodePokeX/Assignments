@@ -33,10 +33,10 @@ myApp.post("/user", (req,res)=>{
         if(index>-1){
             res.status(400).send(`User already exists!`);
             }
-            else{
-                userList.push(user);
-                res.send(`${JSON.stringify(user)} created successfully!`);
-            }
+        else{
+            userList.push(user);
+            res.send(`${JSON.stringify(user)} created successfully!`);
+        }
 }
 });
 
