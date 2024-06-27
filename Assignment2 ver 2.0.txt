@@ -20,7 +20,7 @@ myApp.post("/user", (req,res)=>{
     const uName=req.body.name;
     const uMail=req.body.email;
     const uAge=req.body.age;
-    if(!(req.body.hasOwnProperty("name") && req.body.hasOwnProperty("email") && req.body.hasOwnProperty("age"))){
+    if(/*Object.keys(req.body).length === 0 && req.body.constructor === Object || */!(req.body.hasOwnProperty("name") && req.body.hasOwnProperty("email") && req.body.hasOwnProperty("age"))){
         res.status(400).send("Please enter name, email and age");
     }
     else{
@@ -83,10 +83,29 @@ myApp.post("/list",(req,res)=>{
 
 myApp.post("/list/:uid", (req,res)=>{
     const usrId=req.params.uid;
-    if(!(req.body.hasOwnProperty("item"))){
+    if(/*Object.keys(req.body).length === 0 && req.body.constructor === Object || */!(req.body.hasOwnProperty("item"))){
         res.status(400).send("Please add to your dream list as item");
     }
     else{
+        /*userList.forEach(user=>{
+            if(usrId===user.uid){
+                const index= userList.indexOf(user);
+                if(index>-1){
+                    const item=req.body.item;
+                    if(userList2[index]==null){
+                        userList2[index]=[];
+                        userList2[index].push(item);
+                    }
+                    else{
+                        userList2[index].push(item);
+                    }
+                    res.send(`${item} added successfully!`);
+                }
+                else{
+                    res.status(404).send(`${usrId} not found!`);
+                }
+            }
+        })*/
         const user=userList.find(usr=> usr.uid===usrId);
         const index=userList.indexOf(user);
         if(index>-1){
@@ -126,7 +145,7 @@ myApp.put("/list/:uid/:item", (req,res)=>{
     const searchId=req.params.uid;
     const searchItem=req.params.item;
     const newItem=req.body.item;
-    if(!(req.body.hasOwnProperty("item"))){
+    if(/*(Object.keys(req.body).length === 0 && req.body.constructor === Object)|| */!(req.body.hasOwnProperty("item"))){
         res.status(400).send("Please add to your dream list as item");
     }
     else{
